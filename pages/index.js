@@ -1,9 +1,8 @@
-import { Box, Stack, ThemeProvider, Typography } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import Layout from "../components/layout";
 
 import ServicesCard from "../components/Service/ServicesCard";
-import theme from "../styles/theme";
 
 export default function Home() {
 
@@ -51,8 +50,7 @@ export default function Home() {
   
 
   return (
-    <>
-      <ThemeProvider theme={theme}>
+  
         <Layout title={"خدماتي لانجاوز الخدمات الالكترونية"}>
         <Stack>
           <Box
@@ -64,22 +62,22 @@ export default function Home() {
               انجاز الخدمات الالكترونية
             </Typography>
           </Box>
+      
           <Grid
+
             container
             justifyContent={"space-evenly"}
             bgcolor={"whitesmoke"}
-            spacing={1}
-           
+p={2}           
           >
             {ServicesList.map((i) => (
-              <Grid key={i.title} item  >
+              <Grid p={1} key={i.title} item  >
                 <ServicesCard title={i.title} des={i.des}></ServicesCard>
               </Grid>
             ))}
           </Grid>
         </Stack>
         </Layout>
-      </ThemeProvider>
-    </>
+ 
   );
 }

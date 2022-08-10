@@ -3,7 +3,7 @@ import { Stack } from "@mui/system";
 import Link from "next/link";
 import Layout from "../../../components/layout";
 import BigServicesCard from "../../../components/Service/BigServicesCard";
-import PriceCard from "../../../components/Service/PriceCard";
+import PriceCard from      "../../../components/Service/PriceCard";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 const Order = () => {
   const cat = ["Govt", "PostOffice","PostOffice","PostOffice","PostOffice", "mail"];
