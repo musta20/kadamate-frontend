@@ -45,11 +45,10 @@ const Username = () => {
   if you like.`,
     },
   ];
-  
-  
+
   return (
     <Layout title={"user"}>
-      <Box bgcolor={"whitesmoke"} >
+      <Box bgcolor={"whitesmoke"}>
         <Stack spacing={1} p={1} direction={"row"}>
           <BigUserCard spacing={4}></BigUserCard>
           <Grid
@@ -70,5 +69,35 @@ const Username = () => {
     </Layout>
   );
 };
+
+
+export  function getStaticProps({ params }) {
+ console.log(params)
+  
+    return {
+      props:{}
+    }
+    
+  }
+
+export  function getStaticPaths() {
+  const paths = [
+    {
+      params: {
+        username: "mustafa",
+      },
+    },
+    {
+      params: {
+        username: "ali",
+      },
+    },
+  ];
+
+  return {
+    paths,
+    fallback: true, // false or 'blocking'
+  };
+}
 
 export default Username;

@@ -5,7 +5,6 @@ import Layout from "../components/layout";
 import ServicesCard from "../components/Service/ServicesCard";
 
 export default function Home() {
-
   const ServicesList = [
     {
       title: "Lizadrd",
@@ -47,37 +46,32 @@ export default function Home() {
     },
   ];
 
-  
-
   return (
-  
-        <Layout title={"خدماتي لانجاوز الخدمات الالكترونية"}>
-        <Stack>
-          <Box
-            p={10}
-            justifyContent={"center"}
-            bgcolor={(theme) => theme.palette.primary.main}
-          >
-            <Typography textAlign={"center"} variant="h3">
-              انجاز الخدمات الالكترونية
-            </Typography>
-          </Box>
-      
-          <Grid
+    <Layout title={"خدماتي لانجاوز الخدمات الالكترونية"}>
+      <Stack>
+        <Box
+          p={10}
+          justifyContent={"center"}
+          bgcolor={(theme) => theme.palette.primary.main}
+        >
+          <Typography textAlign={"center"} variant="h3">
+            انجاز الخدمات الالكترونية
+          </Typography>
+        </Box>
 
-            container
-            justifyContent={"space-evenly"}
-            bgcolor={"whitesmoke"}
-p={2}           
-          >
-            {ServicesList.map((i) => (
-              <Grid p={1} key={i.title} item  >
-                <ServicesCard title={i.title} des={i.des}></ServicesCard>
-              </Grid>
-            ))}
-          </Grid>
-        </Stack>
-        </Layout>
- 
+        <Grid
+          container
+          justifyContent={"space-evenly"}
+          bgcolor={"whitesmoke"}
+          p={2}
+        >
+          {ServicesList.map((i) => (
+            <Grid p={1} key={i.title} item>
+              <ServicesCard title={i.title} des={i.des}></ServicesCard>
+            </Grid>
+          ))}
+        </Grid>
+      </Stack>
+    </Layout>
   );
 }
