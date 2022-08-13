@@ -1,0 +1,14 @@
+mutation addServicesMutation($serviceIput: InputServices!) {
+  addServices(serviceIput: $serviceIput) {
+    _id
+    Title
+    Description
+    Requirement
+    NumberOf_Request_Done
+    user_id
+    is_des_req
+    img_id
+    cat_id
+    createdAt
+  }
+}

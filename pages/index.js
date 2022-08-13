@@ -1,9 +1,9 @@
 import { Box, Stack, Typography } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import Layout from "../components/layout";
+import { useAddServicesMutationMutation } from "../generated/graphql.js";
 
 import ServicesCard from "../components/Service/ServicesCard";
-
 export default function Home() {
   const ServicesList = [
     {
@@ -45,6 +45,7 @@ export default function Home() {
   if you like.`,
     },
   ];
+  
 
   return (
     <Layout title={"خدماتي لانجاوز الخدمات الالكترونية"}>
