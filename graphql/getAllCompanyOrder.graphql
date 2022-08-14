@@ -1,0 +1,14 @@
+query AllCompanyOrders {
+  AllCompanyOrders {
+    _id
+    Service_id
+    Request_des
+    User_id
+    combany_id
+    isDone
+    done_msg
+    done_img
+    is_viewed
+    createdAt
+  }
+}

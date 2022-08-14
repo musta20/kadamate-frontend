@@ -41,12 +41,24 @@ export default function Login() {
 }
 
 const logInQuery = (Obj) => {
-  console.log(Obj)
-  axios.post(process.env.NEXT_PUBLIC_BACK_END_DEV+"/login", Obj)
+
+  //axios.defaults.withCredentials = true;
+ fetch(process.env.NEXT_PUBLIC_BACK_END_DEV + '/login', {
+  method: 'POST',
+  withCredentials: true,
+  credentials: 'include',
+  headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(Obj)
+})
+
+/*   axios.post(process.env.NEXT_PUBLIC_BACK_END_DEV+"/login", Obj)
     .then((data) => {
       console.log(data);
     })
     .catch((err) => {
       console.log(err);
-    });
+    }); */
 };

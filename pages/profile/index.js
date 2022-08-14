@@ -1,4 +1,3 @@
-import * as React from "react";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
@@ -23,6 +22,8 @@ import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import Order from "./componants/Order";
 import AccountInfo from "./componants/AccountInfo";
 import Follows from "./componants/Follows";
+import { useEffect, useState } from "react";
+
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -38,6 +39,7 @@ const ItemListICon = ({ open, text, callBack, Icon }) => {
   return (
     <ListItem disablePadding sx={{ display: "block" }}>
       <ListItemButton
+        onClick={callBack}
         sx={{
           minHeight: 48,
           justifyContent: open ? "initial" : "center",
@@ -45,7 +47,6 @@ const ItemListICon = ({ open, text, callBack, Icon }) => {
         }}
       >
         <ListItemIcon
-          onClick={() => callBack()}
           sx={{
             minWidth: 0,
             mr: open ? 3 : "auto",
@@ -119,9 +120,9 @@ const Drawer = styled(MuiDrawer, {
 export default function MiniDrawer() {
   const theme = useTheme();
 
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
-  const [Page, switchPage] = React.useState("Order");
+  const [Page, switchPage] = useState("Order");
 
   const ShowPage = () => {
     switch (Page) {
@@ -131,6 +132,8 @@ export default function MiniDrawer() {
         return <AccountInfo />;
       case "Follows":
         return <Follows />;
+      case "Files":
+        return <h4>Files</h4>;
 
       default:
         break;
@@ -192,7 +195,8 @@ export default function MiniDrawer() {
           />
           <ItemListICon
             text="Files"
-            callBack={() => switchPage("Follows")}
+            open={open}
+            callBack={() => switchPage("Files")}
             Icon={PermMediaIcon}
           />
           <ItemListICon

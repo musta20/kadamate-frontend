@@ -1,0 +1,15 @@
+
+query Profile {
+  Profile {
+    _id
+    name
+    email
+    des
+    phone
+    username
+    user_type
+    password
+    img_id
+    createdAt
+  }
+}

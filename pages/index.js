@@ -1,7 +1,6 @@
 import { Box, Stack, Typography } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import Layout from "../components/layout";
-import { useAddServicesMutationMutation } from "../generated/graphql.js";
 
 import ServicesCard from "../components/Service/ServicesCard";
 export default function Home() {
@@ -47,6 +46,8 @@ export default function Home() {
   ];
   
 
+
+
   return (
     <Layout title={"خدماتي لانجاوز الخدمات الالكترونية"}>
       <Stack>
@@ -74,5 +75,7 @@ export default function Home() {
         </Grid>
       </Stack>
     </Layout>
+
+
   );
 }

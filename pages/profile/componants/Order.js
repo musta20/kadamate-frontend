@@ -1,38 +1,94 @@
-import { Typography } from "@mui/material"
+import * as React from "react";
+import Box from "@mui/material/Box";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import Typography from "@mui/material/Typography";
+import { useAllOrderQuery } from "../../../generated/graphql";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CircularProgress,
+  Stack,
+} from "@mui/material";
 
-export default function Order (){
-    
-    return <>
-          <Typography variant="h1">Order</Typography>
+export default function CenteredTabs() {
+  const [value, setValue] = React.useState(0);
 
-     <Typography paragraph>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Rhoncus
-          dolor purus non enim praesent elementum facilisis leo vel. Risus at
-          ultrices mi tempus imperdiet. Semper risus in hendrerit gravida rutrum
-          quisque non tellus. Convallis convallis tellus id interdum velit
-          laoreet id donec ultrices. Odio morbi quis commodo odio aenean sed
-          adipiscing. Amet nisl suscipit adipiscing bibendum est ultricies
-          integer quis. Cursus euismod quis viverra nibh cras. Metus vulputate
-          eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo
-          quis imperdiet massa tincidunt. Cras tincidunt lobortis feugiat
-          vivamus at augue. At augue eget arcu dictum varius duis at consectetur
-          lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa sapien
-          faucibus et molestie ac.
-        </Typography>
-        <Typography paragraph>
-          Consequat mauris nunc congue nisi vitae suscipit. Fringilla est
-          ullamcorper eget nulla facilisi etiam dignissim diam. Pulvinar
-          elementum integer enim neque volutpat ac tincidunt. Ornare suspendisse
-          sed nisi lacus sed viverra tellus. Purus sit amet volutpat consequat
-          mauris. Elementum eu facilisis sed odio morbi. Euismod lacinia at quis
-          risus sed vulputate odio. Morbi tincidunt ornare massa eget egestas
-          purus viverra accumsan in. In hendrerit gravida rutrum quisque non
-          tellus orci ac. Pellentesque nec nam aliquam sem et tortor. Habitant
-          morbi tristique senectus et. Adipiscing elit duis tristique
-          sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis
-          eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
-          posuere sollicitudin aliquam ultrices sagittis orci a.
-        </Typography></>
+  const [{ data, fetching, error }] = useAllOrderQuery();
 
+  React.useEffect(() => {
+    console.log(data);
+  }, [data]);
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  function TabPanel(props) {
+    const { children, value, index, ...other } = props;
+
+    return (
+      <div
+        role="tabpanel"
+        hidden={value !== index}
+        id={`simple-tabpanel-${index}`}
+        aria-labelledby={`simple-tab-${index}`}
+        {...other}
+      >
+        {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+      </div>
+    );
+  }
+
+  if (fetching) {
+    return <CircularProgress></CircularProgress>;
+  }
+  return (
+    <Box sx={{ width: "100%", bgcolor: "background.paper" }}>
+      <Tabs value={value} onChange={handleChange} centered>
+        <Tab label="Pending Orders" />
+        <Tab label="Completed Orders" />
+        <Tab label="Canceled orders" />
+      </Tabs>
+      <TabPanel value={value} index={0}>
+        {data?.AllOrder && (
+          <Stack gap={5}>
+            {data.AllOrder.filter((o) => o.isDone == 0).map((item) => (
+              <OrderItem key={item._id} item={item}></OrderItem>
+            ))}
+          </Stack>
+        )}
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+        {data?.AllOrder && (
+          <Stack gap={5}>
+            {data.AllOrder.filter((o) => o.isDone == 1).map((item) => (
+              <OrderItem key={item._id} item={item}></OrderItem>
+            ))}
+          </Stack>
+        )}
+      </TabPanel>
+      <TabPanel value={value} index={2}>
+        {data?.AllOrder && (
+          <Stack gap={5}>
+            {data.AllOrder.filter((o) => o.isDone == 2).map((item) => (
+              <OrderItem key={item._id} item={item}></OrderItem>
+            ))}
+          </Stack>
+        )}{" "}
+      </TabPanel>
+    </Box>
+  );
 }
+
+const OrderItem = ({ item }) => {
+  console.log(item);
+  return (
+    <Card>
+      <CardHeader>
+        <Typography color={"black"}>id:{item._id}</Typography>
+      </CardHeader>
+      <CardContent color={"black"}>{item.User_id}</CardContent>
+    </Card>
+  );
+};
